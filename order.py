@@ -1,17 +1,30 @@
 class Order:
-    def __init__(self, user, db):
-        self.user_id = user.id
-        self.user_email = user.email
-        self.db = db
+    """Store information about an order."""
 
-    def save(self, items):
-        self.db.execute(
-            "INSERT INTO orders (user_id, email) VALUES (?, ?)",
-            (self.user_id, self.user_email)
-        )
+    def __init__(self, user_id, user_email, items):
+        self.user_id = user_id
+        self.user_email = user_email
+        self.items = items
 
-        for item in items:
-            self.db.execute(
-                "INSERT INTO order_items (order_id, product, qty) VALUES (?, ?, ?)",
-                (123, item.name, item.qty)
-            )
+
+class OrderRepository:
+    """A simple placeholder for saving orders."""
+
+    def __init__(self):
+        self.orders = []
+
+    def save(self, order):
+        self.orders.append(order)
+
+
+if __name__ == "__main__":
+    order = Order(
+        user_id=1,
+        user_email="customer@example.com",
+        items=["Book", "Pen"]
+    )
+
+    repository = OrderRepository()
+    repository.save(order)
+
+    print(f"Orders stored in memory: {len(repository.orders)}")
