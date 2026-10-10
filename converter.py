@@ -1,11 +1,10 @@
-class Converter:
-    def __init__(self, factor, offset):
-        self.factor = factor
-        self.offset = offset
-
-    def convert(self, value):
-        return value * self.factor + self.offset
+"""Convert temperatures from Fahrenheit to Celsius."""
 
 
-c = Converter(5/9, -32 * 5/9)
-print(c.convert(212))
+def fahrenheit_to_celsius(temperature_fahrenheit):
+    """Return the temperature in Celsius."""
+    return (temperature_fahrenheit - 32) * 5 / 9
+
+
+if __name__ == "__main__":
+    print(fahrenheit_to_celsius(212))
